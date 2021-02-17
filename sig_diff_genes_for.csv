@@ -1,0 +1,86 @@
+﻿AFMID,tryptophan catabolism
+CCDC77,protein associated with cancer
+COLEC12,"Scavenger receptor binds gram + and - bacteria and yeast,, binds carbohydrate antigens "
+DCDC2,"Inhibition of Wnt signalling, involved in neuronal migration during development of neocortex, control of ciliogenesis and ciliary length"
+DDX58,"Innate immune receptor that senses cytoplasmic viral nucleic acids, amplifies RIG-I antiviral signalling, RNA cytosolic viruses RNA sensors play a role in DNA "
+DHX58,"regulator of DDX58/RIG-I and IFIH1/MDA5 mediated antiviral signaling, known relationship with poxviruses"
+DNAJC15,Negative regulator of mitochondrial respiratory chain 
+EPSTI1,Association with cancer
+GPR3,Cell membrane protein receptor
+INTS6,"transmembrane signaling receptor activity, Among its related pathways are Gene Expression and HIV Transcription Elongation"
+KIAA0100,Expressed in tumors
+LOC102031948,
+LOC102032428,
+LOC102033179,
+LOC102033630,
+LOC102034253,
+LOC102037024,
+LOC102037327,
+LOC102037713,
+LOC102041080,
+LOC102041328,
+LOC102042481,
+LOC102043625,
+LOC102045650,
+LOC115947657,
+LOC115948719,
+LOC115948891,
+LRCH1,protein with a leucine-rich repeat and a calponin homology domain
+LYZ,"Encodes a lysosome, lysozymes have primarily a bacteriolytic function; those in tissues and body fluids are associated with the monocyte-macrophage system and enhance the activity of immunoagents"
+NMI,"The NMI protein also interacts with all STATs except STAT2 and augments STAT-mediated transcription in response to cytokines IL2 and IFN-gamma. transcription coregulator activity, Augments cytokine-mediated STAT transcription. Enhances CBP/p300 coactivator protein recruitment to STAT1 and STAT5"
+NMRAL1,"It plays a key role in cellular antiviral response by negatively regulating the interferon response factor 3-mediated expression of interferon beta, Among its related pathways are Viral mRNA Translation and Regulation of activated PAK-2p34 by proteasome mediated degradation"
+PDZD7,Related to deafness and cilia
+PPP1R26,Inhibits phosphatase activity of protein phosphatase 1 (PP1) complexes
+SPATA5L1,"Spermatogenesis, ATPase activity and four-way junction helicase activity"
+SPATS2L,Associated with breast cancer
+TNFAIP8L1,Acts as a negative regulator of mTOR activity.
+TRIM47,"E3 ubiquitin-protein ligase that mediates the ubiquitination and proteasomal degradation of CYLD, CYLD is maybe related to vaccinia"
+USP18,"Involved in the regulation of inflammatory response to interferon type 1, Among its related pathways are Immune response IFN alpha/beta signaling pathway and Interferon gamma signaling. "
+VRK3,"This gene encodes a member of the vaccinia-related kinase (VRK) family of serine/threonine protein kinases. Gene Ontology (GO) annotations related to this gene include transferase activity, transferring phosphorus-containing groups and protein serine/threonine kinase activity."
+ZCCHC2,Gene Ontology (GO) annotations related to this gene include nucleic acid binding and phosphatidylinositol binding.
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+Look for things that will sense the viral infection. ,
+"Also characteristic signatures of a response- type I interferon, IRG, interferon response genes, ",
+We might be able to identify gene families ,
+"Sequence these two finches, look for differences in sensors, ",
+"STING, SEGAS, downstream from pathways ""google STING pathway"" ",
+,Center for vertebrate genomics small 
+,some genes might not be homologous enough to pick it up 
+"A protein calld SEGAS, recognizes the DNA and makes a chemical signalling molecule that stimulates STING ",
+"Find highly conserved regions, narrow down for conserved species  ",
+Identify the right genes in the finch ,
+Figure out how to tell whether something is a homologoue or not ,
+Find out conserved domains ,
+,
+BKA may not be helpful,
+Response to virus might make birds more succeptible to bacteria ,
+"upregulating of mediatiators, v",
+Plasma may not have virus ,
+"plasma might have inflamatory cytokines, tnf, il1, il6",
+"Find reagents for chickens, Cindy, has boxes of reagents ",
+"Elisas antibodies, if we're picking up innate immune differences. ! = antibodies. Specific immunity is antibodies, innate immunity could be a red herring, flow cytometry, ",
+"If they have similar antibody, its more innate",
+Heterophil lyphocyte ratios ,
+"Mouse vaccinia, what do they see in the blood, antibodies, T cells, inflammatory markes ",
+"Chris Norbury, Penn State, ",
+Knockout mice to find particular molecule ,
+Look uninfected veg and ground ,
+Innate minutes 2 days ,
+,
+,
+Cindy thinks there's overlap between DNA and RNA virus sensing. ,
+"Defect in innate sensor pathway, viruses have ways to subvert immune repsonse, pox viruses are good at surpressing interferon, ",
+Defect in pathway that the virus is exploiting ,
+"how to measure interferon? Not elisa, because too many genes, reporter cell assay, take serum from animals, activity assay. If I wanted to test it, luciferace read out, luminometer, 50 microliters per well",
+"STAT promoter region and put it upstream of luciferase, get a finch cell line, reporter system. ",
+ORF figure out what the unannotataed ones are.,
