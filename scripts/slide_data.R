@@ -1,5 +1,11 @@
-library(dplyr)
+# Script to analyze slide microscopy data
+
 library(MASS)
+library(dplyr)
+
+
+
+# Data --------------------------------------------------------------------
 
 
 slides <- read.csv("input_data/leukocyte_results.csv") %>%
@@ -10,21 +16,24 @@ slides <- read.csv("input_data/leukocyte_results.csv") %>%
                            species == "CRA" ~ "veggie"))
 slides$hl_ratio[slides$hl_ratio == "Inf"] <- NA
 
+# Summary stats
 filter(slides, species != "FUL") %>% dplyr::select(total.leukocyte, total.erythrocytes) %>%
-apply(2, median)
+apply(2, median) # median counts of leukos and erythrocytes
   # filter(., total.leukocyte < 50) %>% pull(total.erythrocytes)
 
 fivenum(slides$total.leukocyte)
 table(slides$species, slides$pox)
 
-
 # Just veggie and fortis --------------------------------------------------
+# filter out fuliginosa
+slides2 <- filter(slides, species != "FUL") %>% droplevels()
 fivenum(slides2$total.leukocyte)
 
-head(slides2)
-slides2 <- filter(slides, species != "FUL") %>% droplevels()
-colors <- c("#009988", "#EE7733")
 
+
+# Plots -------------------------------------------------------------------
+
+colors <- c("#009988", "#EE7733")
 pdf("output_plots/leukocytes.pdf")
 par(mfrow=c(2,2), mar = c(5,4,2,2))
 boxplot(leukocyte.per.1000.erythrocyte ~ species + pox, data=  slides2,
@@ -69,17 +78,13 @@ mtext("D", side = 3, line = 0, adj = - .23, cex = 1.4)
 
 dev.off()
 
+# Stats -------------------------------------------------------------------
+
+
 summary(glm(leukocyte.per.1000.erythrocyte ~ species + pox, family = "quasipoisson", data=  slides2))
 summary(glm(lymphocyte.per.1000.erythrocyte ~ species, family = "quasipoisson", data=  slides2))
 summary(glm(monocyte.per.1000.erythrocyte ~ species + pox, family = "quasipoisson", data=  slides2))
 summary(glm(hl_ratio ~ species + pox , family = "quasipoisson", data=  slides2))
-summary(log(hl_ratio + 1) ~ species * pox ,  data=  slides2))
-
-summary(glm(monocyte ~ species * pox +total.erythrocytes, family = "quasipoisson", data=  slides2))
-mean(slides2$monocyte.per.1000.erythrocyte)
-
-hist(slides2$hl_ratio)
-
 
 # All species -------------------------------------------------------------
 
@@ -132,8 +137,4 @@ mtext("Uninfected", side = 1, line = 3, adj = 0.75, cex = 1.2)
 
 summary(lm(log(hl_ratio + 1) ~ species + pox + sex, data=  slides))
 summary(glm.nb(hl_ratio+1 ~ species + pox , data=  slides))
-hist(log(slides$hl_ratio+1))
-hist(slides$hl_ratio)
-hist(slides$heterophil)
-summary(slides$hl_ratio)
-View(slides)
+

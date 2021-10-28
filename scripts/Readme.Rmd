@@ -9,8 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Analysis overview for McNew et al. 2021 Transcriptomic responses of Galápagos 
-finches to avian pox virus infection
+## Analysis overview for McNew et al. 2021 
+### Transcriptomic responses of Galápagos finches to avian pox virus infection
 
 ### Scripts: 
 1) 
+2) **bracken.R** Script to analyze results of kraken/bracken metatranscriptomics. 
+Used to test whether pox reads were found within transcriptomic dataset and whether
+there were differences in number of pox reads between species/groups.
+3) **slide_data.R** Script to analyze leukocyte counts from slide microscopy
