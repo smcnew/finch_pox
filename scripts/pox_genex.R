@@ -1,7 +1,7 @@
 
-#BiocManager::install("DESeq2")
-#BiocManager::install("biomaRt")
-#BiocManager::install('EnhancedVolcano')
+BiocManager::install("DESeq2")
+BiocManager::install("biomaRt")
+BiocManager::install('EnhancedVolcano')
 
 library(DESeq2)
 library(biomaRt)
@@ -41,12 +41,13 @@ raw_counts
 
 # Pull metadata out
 metadata <- data.frame(sample = colnames(raw_counts)) %>%
-  mutate(
+  dplyr::mutate(
     species = str_sub(sample,-3),
     treatment = str_sub(sample, start = -4, end = -4),
     sp_tret = str_sub(sample,-4),
     band = unlist(str_split(sample, "[.]"))[2]
   )
+
 
 # need to make sure metadata and columns are in same order
 all(metadata$sample == colnames(raw_counts)) #TRUE
@@ -56,9 +57,56 @@ dds_all <- DESeqDataSetFromMatrix(countData = raw_counts,
 # Remove genes with fewer than 10 reads
 keep <- rowSums(counts(dds_all)) >= 10
 dds_all <- dds_all[keep,]
+dds_all <- DESeq(dds_all)
+
+# fortis
+res_for <- results(dds_all, contrast = c("sp_tret", "IFOR", "UFOR"), alpha = .05)
+summary(res_for)
+
+res_cra <- results(dds_all, contrast = c("sp_tret", "ICRA", "UCRA"), alpha = .05)
+summary(res_cra)
+
+res_cra_for <- results(dds_all, contrast = c("sp_tret", "IFOR", "ICRA"), alpha = .05)
+summary(res_cra_for)
+
+pdf("output_plots/volcanos_m_andf.pdf")
+par(mfrow=c(1,2))
+EnhancedVolcano(res_for,
+                lab = rownames(res_for),
+                title = "Medium ground finch",
+                x = 'log2FoldChange',
+                y = 'pvalue',
+                #pCutoff = .01,
+                FCcutoff = 2,
+                xlim = c(-7,7),
+                col=c('black', 'black', 'blue', 'red3'),#'#009988'
+                colAlpha = 0.5,
+                boxedLabels = TRUE,
+                drawConnectors = TRUE,
+                widthConnectors = .8)
+
+
+EnhancedVolcano(res_cra,
+                lab = rownames(res_cra),
+                title = "Vegetarian finch",
+                x = 'log2FoldChange',
+                y = 'pvalue',
+                #pCutoff = .01,
+                FCcutoff = 2,
+                xlim = c(-7,7),
+                col=c('black', 'black', 'blue', 'red3'),#'#009988'
+                colAlpha = 0.5,
+                boxedLabels = TRUE,
+                drawConnectors = TRUE,
+                widthConnectors = .8)
+
+dev.off()
+
+
 
 # Normalize reads and export
 vst(dds_all, blind = TRUE) %>% assay %>% write.csv("input_data/normalized_counts_dseq_all.csv")
+
 
 
 
@@ -78,17 +126,16 @@ dds <- DESeqDataSetFromMatrix(countData = males_raw,
                               colData = males_metadata,
                               design = ~ sp_tret)
 # Prefilter to remove low count genes
-keep <- rowSums(counts(dds)) >= 10
-dds <- dds[keep,]
+
 counts(vsd, normalized = T) %>% head
 
-vsd <- vst(dds, blind = T)
+vsd <- vst(dds_all, blind = T)
 assay(vsd) %>% write.csv("input_data/normalized_counts_dseq_males.csv")
 
 pca <- plotPCA(vsd, intgroup = c("species", "treatment"), returnData = T)
 percentVar <- round(100 * attr(pca, "percentVar"))
 ggplot(pca, aes(PC1, PC2, color=species, shape = treatment)) +
-  geom_point(size = 3, stroke = 2) +
+  geom_point(size = 3, stroke = 2, alpha = 0.9) +
   scale_color_manual(values = c("#33BBEE", "#EE3377"), labels = c("Vegetarian","Med. Ground")) +
   scale_shape_manual(values = c(3, 1), labels = c("Infected", "Uninfected")) +
   xlab(paste0("PC1: ", percentVar[1], "% variance"))+

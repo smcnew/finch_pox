@@ -1,0 +1,16 @@
+---
+title: "Readme: pox project"
+author: "Sabrina McNew"
+date: "4/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis overview for McNew et al. 2021 Transcriptomic responses of Galápagos 
+finches to avian pox virus infection
+
+### Scripts: 
+1) 
