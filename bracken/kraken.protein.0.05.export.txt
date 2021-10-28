@@ -1,0 +1,95 @@
+SM1	  0.00	3	0	F1	10241	                Chordopoxvirinae
+SM1	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM1	  0.00	3	3	S	28873	                    Camelpox virus
+SM2	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM2	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM2	  0.00	1	1	S	28873	                    Camelpox virus
+SM3	  0.00	4	0	F1	10241	                Chordopoxvirinae
+SM3	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM3	  0.00	3	3	S	28873	                    Camelpox virus
+SM3	  0.00	1	0	F2	40070	                  unclassified Chordopoxvirinae
+SM4	  0.00	3	0	F1	10241	                Chordopoxvirinae
+SM4	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM4	  0.00	3	3	S	28873	                    Camelpox virus
+SM5	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM5	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM5	  0.00	2	2	S	28873	                    Camelpox virus
+SM6	  0.00	7	0	F1	10241	                Chordopoxvirinae
+SM6	  0.00	7	0	G	10242	                  Orthopoxvirus
+SM6	  0.00	7	7	S	28873	                    Camelpox virus
+SM8	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM8	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM8	  0.00	1	1	S	28873	                    Camelpox virus
+SM9	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM9	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM9	  0.00	2	2	S	28873	                    Camelpox virus
+SM10	  0.00	3	0	F1	10241	                Chordopoxvirinae
+SM10	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM10	  0.00	3	3	S	28873	                    Camelpox virus
+SM11	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM11	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM11	  0.00	2	2	S	28873	                    Camelpox virus
+SM12	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM12	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM12	  0.00	1	1	S	28873	                    Camelpox virus
+SM13	  0.00	6	0	F1	10241	                Chordopoxvirinae
+SM13	  0.00	6	0	G	10242	                  Orthopoxvirus
+SM13	  0.00	6	6	S	28873	                    Camelpox virus
+SM14	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM14	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM14	  0.00	1	1	S	28873	                    Camelpox virus
+SM15	  0.00	3	0	F1	10241	                Chordopoxvirinae
+SM15	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM15	  0.00	3	3	S	28873	                    Camelpox virus
+SM17	  0.00	7	0	F1	10241	                Chordopoxvirinae
+SM17	  0.00	7	0	G	10242	                  Orthopoxvirus
+SM17	  0.00	7	7	S	28873	                    Camelpox virus
+SM18	  0.00	5	0	F1	10241	                Chordopoxvirinae
+SM18	  0.00	5	0	G	10242	                  Orthopoxvirus
+SM18	  0.00	5	5	S	28873	                    Camelpox virus
+SM19	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM19	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM19	  0.00	2	2	S	28873	                    Camelpox virus
+SM20	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM20	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM20	  0.00	1	1	S	28873	                    Camelpox virus
+SM21	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM21	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM21	  0.00	2	2	S	28873	                    Camelpox virus
+SM23	  0.00	17	0	F1	10241	                Chordopoxvirinae
+SM23	  0.00	17	0	G	10242	                  Orthopoxvirus
+SM23	  0.00	17	17	S	28873	                    Camelpox virus
+SM24	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM24	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM24	  0.00	2	2	S	28873	                    Camelpox virus
+SM25	  0.00	7	0	F1	10241	                Chordopoxvirinae
+SM25	  0.00	6	0	G	10242	                  Orthopoxvirus
+SM25	  0.00	6	6	S	28873	                    Camelpox virus
+SM25	  0.00	1	0	G	10278	                  Molluscipoxvirus
+SM26	  0.00	4	0	F1	10241	                Chordopoxvirinae
+SM26	  0.00	4	0	G	10242	                  Orthopoxvirus
+SM26	  0.00	4	4	S	28873	                    Camelpox virus
+SM28	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM28	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM28	  0.00	1	1	S	28873	                    Camelpox virus
+SM29	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM29	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM29	  0.00	2	2	S	28873	                    Camelpox virus
+SM30	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM30	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM30	  0.00	2	2	S	28873	                    Camelpox virus
+SM31	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM31	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM31	  0.00	1	1	S	28873	                    Camelpox virus
+SM32	  0.00	1	0	F1	10241	                Chordopoxvirinae
+SM32	  0.00	1	0	G	10242	                  Orthopoxvirus
+SM32	  0.00	1	1	S	28873	                    Camelpox virus
+SM33	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM33	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM33	  0.00	2	2	S	28873	                    Camelpox virus
+SM35	  0.00	3	0	F1	10241	                Chordopoxvirinae
+SM35	  0.00	3	0	G	10242	                  Orthopoxvirus
+SM35	  0.00	3	3	S	28873	                    Camelpox virus
+SM40	  0.00	2	0	F1	10241	                Chordopoxvirinae
+SM40	  0.00	2	0	G	10242	                  Orthopoxvirus
+SM40	  0.00	2	2	S	28873	                    Camelpox virus
