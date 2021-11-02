@@ -353,7 +353,7 @@ cra_for_mu_kegg <- sort_genes(for_cra_mu, species = "fortis") %>%
 
 p8 <- for_iu_kegg %>% ridgeplot(fill = "p.adjust")+ ggtitle("Ground: infected vs. uninfected")+
   xlab(expression(log[2]*" fold change" ))
-p9 <- cra_iu_kegg  %>% ridgeplot(fill = "qvalue")+  ggtitle('Vegetarian: infected vs. uninfected')+
+p9 <- cra_iu_kegg  %>% ridgeplot(fill = "p.adjust")+  ggtitle('Vegetarian: infected vs. uninfected')+
   xlab(expression(log[2]*" fold change" ))
 p10 <- cra_for_i_kegg %>% ridgeplot(fill = "p.adjust") + ggtitle("Infected: ground vs. vegetarian ")+
   xlab(expression(log[2]*" fold change" ))
