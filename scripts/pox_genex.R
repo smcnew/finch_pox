@@ -1,8 +1,8 @@
 # A script to estimate expression counts from alignment data
 
-#BiocManager::install("DESeq2")
-#BiocManager::install("biomaRt")
-#BiocManager::install('EnhancedVolcano')
+BiocManager::install("DESeq2")
+BiocManager::install("biomaRt")
+BiocManager::install('EnhancedVolcano')
 
 library(DESeq2)
 library(biomaRt)
@@ -15,26 +15,11 @@ library(EnhancedVolcano)
 # TREX produced file of raw counts
 raw_counts <- read.table("TREX_Results/2008D-Gfortis_rawCounts.txt")
 head(raw_counts)
-
-# idk what's happening here
-#sig_diff <- read.csv("input_data/sig_diff.csv")
-#head(sig_diff)
-#genes <- sig_diff %>% pull %>% as.character()
-
+colnames(raw_counts)
+metadata <- read.csv("input_data/metadata.csv")
 # for vs. cra genes
 ifor_cra <- read.csv("TREX_Results/ifor_vs_icra.csv")
 ufor_cra <- read.csv("TREX_Results/ufor_vs_ucra.csv")
-# Convert gene to ensembl -------------------------------------------------
-# what is this??
-
-ensembl = useMart("ensembl", dataset = "tguttata_gene_ensembl")
-
-getBM(attributes =
-      filters = 'ensembl_gene_id',
-      values = genes,
-      mart = ensembl)
-listAttributes(ensembl) %>% dplyr::filter(., name =="hgnc_symbol")
-
 
 # DESeq2 ------------------------------------------------------------------
 # All samples (males and females)
@@ -117,25 +102,22 @@ dev.off()
 
 
 # Males only --------------------------------------------------------------
-males_raw <- dplyr::select(raw_counts, contains(".M."))
-males_metadata <- data.frame(sample = colnames(males_raw)) %>%
-  mutate(species = str_sub(sample, -3),
-         treatment = str_sub(sample, start = -4, end = -4),
-         sp_tret = str_sub(sample, -4),
-         band = unlist(str_split(sample, "[.]"))[2])
+
+males_metadata <- filter(metadata, sex =="M")
+males_raw <- dplyr::select(raw_counts, males_metadata$sequence_id)
 
 # need to make sure metadata and columns are in same order
-all(males_metadata$sample == colnames(males_raw)) #TRUE
-head(males_metadata)
+all(males_metadata$sequence_id == colnames(males_raw)) #TRUE
+
 dds <- DESeqDataSetFromMatrix(countData = males_raw,
                               colData = males_metadata,
-                              design = ~ sp_tret)
+                              design = ~ group)
 # Pre-filter to remove low count genes
 keep <- rowSums(counts(dds)) >= 10 #clean data by removing rows with < 10 cts
 dds <- dds[keep,]
 dds <- DESeq(dds)
-res_for <- results(dds, contrast = c("sp_tret", "UFOR", "IFOR"), alpha = .05)
-res_cra <- results(dds, contrast = c("sp_tret","UCRA", "ICRA"), alpha = .05)
+res_for <- results(dds, contrast = c("group", "UFOR", "IFOR"), alpha = .05)
+res_cra <- results(dds, contrast = c("group","UCRA", "ICRA"), alpha = .05)
 
 # Then use assay to extract the matrix of normalized counts
 vsd <- vst(dds, blind = T)
@@ -157,9 +139,12 @@ ggplot(pca, aes(PC1, PC2, color=species, shape = treatment)) +
   axis.title=element_text(size=20))
 
 ggsave("output_plots/pca.pdf", width = 7, height = 5)
+head(pca)
+ggplot(pca, aes(PC1, PC2, color=species, shape = treatment, label = name))+
+  geom_point()+
+  geom_text(aes(label= name),hjust=0, vjust=0, size =3
+          )
 
-
-
-
+head(pca)
 #
 

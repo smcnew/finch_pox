@@ -1,12 +1,12 @@
 # Script to use Cluster Profiler to investigate function of differentially
 # expressed genes
 
-BiocManager::install("clusterProfiler")
-BiocManager::install("pathview")
+#BiocManager::install("clusterProfiler")
+#BiocManager::install("pathview")
 #BiocManager::install("enrichplot")
-install.packages("wordcloud")
-install.packages("ggupset")
-BiocManager::install("mygene")
+#install.packages("wordcloud")
+#install.packages("ggupset")
+#BiocManager::install("mygene")
 
 library(clusterProfiler)
 library(wordcloud)
@@ -77,14 +77,6 @@ pull(DIFF_EXP) %>% sum %>% paste(i, .) %>% print
 
 
 
-# SET THE DESIRED REF ORGANISM HERE (chicken); not sure I need this anymore.
-#organism = "org.Gg.eg.db"
-#BiocManager::install(organism, character.only = TRUE)
-#library(organism, character.only = TRUE)
-
-# if library doesn't load try
-# options(connectionObserver = NULL) then
-# call dbDisconnect() when finished working with a connection (this didn't work)
 
 # functions ---------------------------------------------------------------
 # Need functions to translate gene names and return either a) sorted gene list
