@@ -16,7 +16,7 @@ library(EnhancedVolcano)
 raw_counts <- read.table("TREX_Results/2008D-Gfortis_rawCounts.txt")
 head(raw_counts)
 colnames(raw_counts)
-metadata <- read.csv("input_data/metadata.csv")
+metadata2 <- read.csv("input_data/metadata.csv")
 # for vs. cra genes
 ifor_cra <- read.csv("TREX_Results/ifor_vs_icra.csv")
 ufor_cra <- read.csv("TREX_Results/ufor_vs_ucra.csv")
@@ -59,7 +59,7 @@ res_cra_for <- results(dds_all, contrast = c("sp_tret", "IFOR", "ICRA"), alpha =
 summary(res_cra_for)
 
 # Normalize reads and export
-vst(dds_all, blind = TRUE) %>% assay %>% write.csv("input_data/normalized_counts_dseq_all.csv")
+#vst(dds_all, blind = TRUE) %>% assay %>% write.csv("input_data/normalized_counts_dseq_all.csv")
 vsd_all <- vst(dds_all, blind = TRUE) #create this object for PCA
 
 # Volcano plots: all individuals  --------------------------------------------------
@@ -148,3 +148,17 @@ ggplot(pca, aes(PC1, PC2, color=species, shape = treatment, label = name))+
 head(pca)
 #
 
+
+# Revision ----------------------------------------------------------------
+
+# make a PCA to determine whether breeding condition matters
+head(metadata2)
+pca2 <- select(metadata2, sequence_id, breeding, sex) %>% rename (name = sequence_id) %>%
+  merge(., pca)
+pca2$breeding <- as.factor(pca2$breeding)
+
+ggplot(pca2, aes(PC1, PC2, color=breeding, shape = sex)) +
+  geom_point(size = 3, stroke = 2, alpha = 0.9)
+
+table(metadata2$sex)
+29/40

@@ -75,7 +75,16 @@ for(i in list_all) {
 pull(DIFF_EXP) %>% sum %>% paste(i, .) %>% print
 }
 
-
+# pull and format genes for supplemental table
+for_iu %>% filter(sex.linked == "-") %>%
+  filter(DIFF_EXP==1) %>% dplyr::select(GeneID, locus, avg.IFOR, avg.UFOR, log2.FC., pvalue, padj) %>%
+  write.csv("output_plots/for_deg.csv")
+for_miu %>%
+  filter(DIFF_EXP==1) %>% dplyr::select(GeneID, locus, avg.mIFOR, avg.mUFOR, log2.FC., pvalue, padj) %>%
+  write.csv("output_plots/for_males_deg.csv")
+cra_iu %>% filter(sex.linked == "-") %>%
+  filter(DIFF_EXP==1) %>% dplyr::select(GeneID, locus, avg.ICRA, avg.UCRA, log2.FC., pvalue, padj) %>%
+  write.csv("output_plots/cra_deg.csv")
 
 
 # functions ---------------------------------------------------------------
@@ -245,29 +254,45 @@ for_cra_mu_gsea %>% ridgeplot()
 
 # hallmark ridgeplots for export ------------------------------------------
 # all individuals
+head(for_iu_gsea)
+for_iu_gsea %>% ridgeplot(., fill = "p.adjust", label_format = function(x) uncap(x))+ ggtitle("Ground: infected vs uninfected") +
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.041))
 p1 <- for_iu_gsea %>% ridgeplot(label_format = function(x) uncap(x))+ ggtitle("Ground: infected vs uninfected") +
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" )) +
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.041))
 p2 <- cra_iu_gsea %>% ridgeplot(label_format = function(x) uncap(x))+  ggtitle('Vegetarian: infected vs. uninfected')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.041))
 p3 <- cra_for_i_gsea %>% ridgeplot(label_format = function(x) uncap(x)) +  ggtitle('Infected: ground vs. vegetarian')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.041))
 p4 <- cra_for_u_gsea %>% ridgeplot(label_format = function(x) uncap(x)) +  ggtitle('Uninfected: ground vs. vegetarian')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.041))
 pdf("output_plots/hallmark_ridgeplots.pdf", width = 12, height = 10)
 plot_grid(p1, p2, p3, p4, labels = c('A', 'B', 'C', 'D'), label_size = 14)
 dev.off()
 
+
+
 # just males
 # cra i vs. u no significant dif
 p5 <- for_miu_gsea %>% ridgeplot(label_format = function(x) uncap(x))+ ggtitle("Ground: infected vs uninfected")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.05))
+
 p6 <- for_cra_mi_gsea %>% ridgeplot(label_format = function(x) uncap(x)) +  ggtitle('Infected: ground vs. vegetarian')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.05))
+
 p7 <- for_cra_mu_gsea %>% ridgeplot(label_format = function(x) uncap(x)) +  ggtitle('Uninfected: ground vs. vegetarian')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000000001, 0.05))
+
 pdf("output_plots/hallmark_ridgeplots_males.pdf", width = 12, height = 10)
 plot_grid(p5, p6, p7, labels = c('A', 'B', 'C'), label_size = 14)
 dev.off()
+min(for_miu_gsea$p.adjust)
 
 # Venn diagram ------------------------------------------------------------
 # Decided not to include this in publication; it's not that interesting.
@@ -344,27 +369,37 @@ cra_for_mu_kegg <- sort_genes(for_cra_mu, species = "fortis") %>%
 # kegg ridgeplots ---------------------------------------------------------
 
 p8 <- for_iu_kegg %>% ridgeplot(fill = "p.adjust")+ ggtitle("Ground: infected vs. uninfected")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
 p9 <- cra_iu_kegg  %>% ridgeplot(fill = "p.adjust")+  ggtitle('Vegetarian: infected vs. uninfected')+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
 p10 <- cra_for_i_kegg %>% ridgeplot(fill = "p.adjust") + ggtitle("Infected: ground vs. vegetarian ")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
 p11 <- ridgeplot(cra_for_u_kegg, fill = "p.adjust") +  ggtitle("Uninfected: ground vs. vegetarian")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
 
 pdf("output_plots/kegg_ridgeplots.pdf", width = 12, height = 9)
 plot_grid(p8, p9, p10, p11, labels = c('A', 'B', 'C', 'D'), label_size = 14)
 dev.off()
-
+cra_for_u_kegg$p.adjust %>% max
 
 # Now males vs. females
 # fortis infected vs. uninfected males
 p12 <- for_miu_kegg  %>% ridgeplot(fill = "p.adjust") + ggtitle("Ground: infected vs. uninfected males")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
+
 p13 <- cra_for_mi_kegg %>% ridgeplot(fill = "p.adjust") + ggtitle("Infected: male ground vs. male vegetarian")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
+
 p14 <- cra_for_mu_kegg %>% ridgeplot(fill = "p.adjust") + ggtitle("Uninfected: male ground vs. male vegetarian")+
-  xlab(expression(log[2]*" fold change" ))
+  xlab(expression(log[2]*" fold change" ))+
+  scale_fill_gradient(low = "red", high = "blue",name = "Adjusted p", limits=c(0.000001, 0.046))
+
 
 pdf("output_plots/kegg_ridgeplots_males.pdf", width = 12, height = 9)
 plot_grid(p12,p13,p14, labels = c("A", "B", "C"), label_size = 14)

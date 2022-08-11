@@ -4,7 +4,7 @@ library(tidyverse)
 library(clusterProfiler)
 library(MASS)
 library(dplyr)
-
+library(sjPlot)
 # Data --------------------------------------------------------------------
 metadata <- read.csv("input_data/metadata.csv")
 
@@ -31,9 +31,9 @@ aggregate(number.frag.group ~ species + infection.status, ., mean)
 fivenum(kraken_protein$number.frag.group)
 
 # Test for significant differences between species and infected/uninfected
-glm.nb(number.frag.group/unmapped_reads ~ species + infection.status,
+glm.nb(number.frag.group/total_reads ~ species + infection.status,
        data = kraken_protein) %>%
-        summary()
+        tab_model()#summary()
 
 
 # Classification using stringency = 0.05, slightly more selective matching criterion
@@ -45,9 +45,9 @@ kraken_protein_5 <- read.table("bracken/kraken.protein.0.05.export.txt", sep = "
 kraken_protein_5  <- kraken_protein_5 %>% filter(taxonid == "10241") %>% merge(., metadata, all.y = T)
 aggregate(number.frag.group ~ species + infection.status, kraken_protein_5, mean)
 
-glm.nb(number.frag.group/unmapped_reads ~ species + infection.status,
-       data = kraken_protein_5) %>% summary()
-
+glm.nb(number.frag.group/total_reads ~ species + infection.status,
+       data = kraken_protein_5) %>% tab_model#summary()
+head(kraken_protein_5)
 
 # Summary stats -----------------------------------------------------------
 # Some numbers about sequencing results and alignment etc.

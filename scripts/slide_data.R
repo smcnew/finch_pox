@@ -2,15 +2,17 @@
 
 library(MASS)
 library(dplyr)
-
+library(plotrix)
 
 
 # Data --------------------------------------------------------------------
 
 
-slides <- read.csv("input_data/leukocyte_results.csv") %>%
+slides <- read.csv("input_data/final_leuk_data.csv") %>%
   filter(Read_unread == "read") %>% filter(pox != "R") %>%
   mutate(hl_ratio = heterophil/lymphocyte) %>%
+  mutate(eosin.per1000 = eosinophil/total.erythrocytes) %>%
+  mutate(basophil.per1000 = basophil/total.erythrocytes) %>%
   mutate(clade = case_when(species == "FOR" ~ "ground",
                            species == "FUL" ~ "ground",
                            species == "CRA" ~ "veggie"))
@@ -28,8 +30,11 @@ table(slides$species, slides$pox)
 # filter out fuliginosa
 slides2 <- filter(slides, species != "FUL") %>% droplevels()
 fivenum(slides2$total.leukocyte)
+aggregate(cbind(leuk.100eryth, lymphocyte.per.1000.erythrocyte ,monocyte.per.1000.erythrocyte,
+                hl_ratio) ~ pox + species, data = slides2, mean) %>% tab_df()
 
-
+aggregate(cbind(leuk.100eryth, lymphocyte.per.1000.erythrocyte ,monocyte.per.1000.erythrocyte,
+                hl_ratio) ~ pox + species, data = slides2, max) %>% tab_df()
 
 # Plots -------------------------------------------------------------------
 
@@ -81,7 +86,7 @@ dev.off()
 # Stats -------------------------------------------------------------------
 
 
-summary(glm(leukocyte.per.1000.erythrocyte ~ species + pox, family = "quasipoisson", data=  slides2))
+summary(glm(leuk.100eryth ~ species + pox, family = "quasipoisson", data=  slides2))
 summary(glm(lymphocyte.per.1000.erythrocyte ~ species, family = "quasipoisson", data=  slides2))
 summary(glm(monocyte.per.1000.erythrocyte ~ species + pox, family = "quasipoisson", data=  slides2))
 summary(glm(hl_ratio ~ species + pox , family = "quasipoisson", data=  slides2))
