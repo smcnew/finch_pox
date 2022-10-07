@@ -126,7 +126,8 @@ assay(vsd) %>% write.csv("input_data/normalized_counts_dseq_males.csv")
 
 # PCA -------------------------------------------------
 
-
+ggplot(pca, aes(PC1, PC2, color = species, label = name)) +
+  geom_text(position=position_jitter(width = .1, height = .1))
 pca <- plotPCA(vsd_all, intgroup = c("species", "treatment"), returnData = T)
 percentVar <- round(100 * attr(pca, "percentVar"))
 ggplot(pca, aes(PC1, PC2, color=species, shape = treatment)) +
